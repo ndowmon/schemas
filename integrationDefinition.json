@@ -23,6 +23,43 @@
                 "lambdaFunctionArn": {
                     "type": "string"
                 },
+                "authSection": {
+                    "type": "object",
+                    "properties": {
+                        "validationLambdaFunctionArn": {
+                            "type": "string"
+                        },
+                        "authConfigSections": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ConfigSection"
+                            }
+                        }
+                    },
+                    "required": [
+                        "authConfigSections"
+                    ],
+                    "additionalProperties": false
+                },
+                "configSections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConfigSection"
+                    }
+                },
+                "configFields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConfigField"
+                    },
+                    "deprecated": "- use authSection and configSections instead"
+                },
+                "uniqueFields": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "integrationType": {
                     "type": "string"
                 },
@@ -53,18 +90,6 @@
                     },
                     "additionalProperties": false
                 },
-                "configFields": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ConfigField"
-                    }
-                },
-                "uniqueFields": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
                 "beta": {
                     "type": "boolean"
                 },
@@ -79,31 +104,6 @@
                 },
                 "invocationPaused": {
                     "type": "boolean"
-                },
-                "authSection": {
-                    "type": "object",
-                    "properties": {
-                        "validationLambdaFunctionArn": {
-                            "type": "string"
-                        },
-                        "authConfigSections": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ConfigSection"
-                            }
-                        }
-                    },
-                    "required": [
-                        "validationLambdaFunctionArn",
-                        "authConfigSections"
-                    ],
-                    "additionalProperties": false
-                },
-                "configSections": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ConfigSection"
-                    }
                 },
                 "integrationPlatformFeatures": {
                     "type": "object",
@@ -122,8 +122,30 @@
                 "type",
                 "title",
                 "lambdaFunctionArn",
+                "configFields",
                 "integrationType",
-                "integrationClass",
+                "integrationClass"
+            ],
+            "additionalProperties": false
+        },
+        "ConfigSection": {
+            "type": "object",
+            "properties": {
+                "displayName": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "configFields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConfigField"
+                    }
+                }
+            },
+            "required": [
+                "displayName",
                 "configFields"
             ],
             "additionalProperties": false
@@ -257,28 +279,6 @@
             "required": [
                 "name",
                 "value"
-            ],
-            "additionalProperties": false
-        },
-        "ConfigSection": {
-            "type": "object",
-            "properties": {
-                "displayName": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "configFields": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ConfigField"
-                    }
-                }
-            },
-            "required": [
-                "displayName",
-                "configFields"
             ],
             "additionalProperties": false
         }

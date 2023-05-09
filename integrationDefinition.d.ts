@@ -29,6 +29,25 @@ export interface IntegrationDefinition {
    * `IntegrationActionTriggerEvent`s.
    */
   lambdaFunctionArn: string;
+
+  authSection?: {
+    validationLambdaFunctionArn?: string;
+    authConfigSections: ConfigSection[];
+  };
+  configSections?: ConfigSection[];
+  /**
+   * The fields specific to this integration that will be included in the
+   * integration instance configuration UI and in the instance's encrypted
+   * config in DynamoDB.
+   * 
+   * @deprecated - use authSection and configSections instead
+   */
+  configFields: ConfigField[];
+  /**
+   * The fields specific to this integration that will be checked for uniqueness
+   * when a user attempts to create an integration instance.
+   */
+  uniqueFields?: string[];
   /**
    * The type of the integration, transferred to entity data created by the
    * integration.
@@ -62,17 +81,6 @@ export interface IntegrationDefinition {
       oAuthUrlGeneratorPath?: string;
   };
   /**
-   * The fields specific to this integration that will be included in the
-   * integration instance configuration UI and in the instance's encrypted
-   * config in DynamoDB.
-   */
-  configFields: ConfigField[];
-  /**
-   * The fields specific to this integration that will be checked for uniqueness
-   * when a user attempts to create an integration instance.
-   */
-  uniqueFields?: string[];
-  /**
    * When set to "true", this integration will have the beta indicator in the UI.
    */
   beta?: boolean;
@@ -94,11 +102,6 @@ export interface IntegrationDefinition {
    * that has this integration definition ID.
    */
   invocationPaused?: boolean;
-  authSection?: {
-    validationLambdaFunctionArn: string;
-    authConfigSections: ConfigSection[];
-  };
-  configSections?: ConfigSection[];
   integrationPlatformFeatures?: {
     supportsChildInstances?: boolean;
   };
