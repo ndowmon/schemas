@@ -1,0 +1,226 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$ref": "#/definitions/IntegrationDefinition",
+    "definitions": {
+        "IntegrationDefinition": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "lambdaFunctionArn": {
+                    "type": "string"
+                },
+                "integrationType": {
+                    "type": "string"
+                },
+                "integrationClass": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "offsiteUrl": {
+                    "type": "string",
+                    "deprecated": ""
+                },
+                "offsiteButtonTitle": {
+                    "type": "string",
+                    "deprecated": ""
+                },
+                "offsiteStatusQuery": {
+                    "type": "string",
+                    "deprecated": ""
+                },
+                "oAuth": {
+                    "type": "object",
+                    "properties": {
+                        "oAuthUrlGeneratorPath": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "configFields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConfigField"
+                    }
+                },
+                "uniqueFields": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "beta": {
+                    "type": "boolean"
+                },
+                "repoWebLink": {
+                    "type": "string"
+                },
+                "environments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IntegrationDefinitionEnvironment"
+                    }
+                },
+                "invocationPaused": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "type",
+                "title",
+                "lambdaFunctionArn",
+                "integrationType",
+                "integrationClass",
+                "configFields"
+            ],
+            "additionalProperties": false
+        },
+        "ConfigField": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "string",
+                        "boolean",
+                        "number",
+                        "array",
+                        "multiSelect",
+                        "textFileUpload"
+                    ]
+                },
+                "format": {
+                    "type": "string"
+                },
+                "defaultValue": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
+                },
+                "triggerOAuth": {
+                    "type": "boolean"
+                },
+                "mask": {
+                    "type": "boolean"
+                },
+                "optional": {
+                    "type": "boolean"
+                },
+                "helperText": {
+                    "type": "string"
+                },
+                "inputAdornment": {
+                    "type": "string"
+                },
+                "immutable": {
+                    "type": "boolean"
+                },
+                "computed": {
+                    "type": "boolean"
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConfigFieldOption"
+                    }
+                },
+                "configFields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConfigField"
+                    }
+                }
+            },
+            "required": [
+                "key",
+                "displayName",
+                "description"
+            ],
+            "additionalProperties": false
+        },
+        "ConfigFieldOption": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "webLink": {
+                    "type": "string"
+                },
+                "default": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "additionalProperties": false
+        },
+        "IntegrationDefinitionEnvironment": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "boolean"
+                },
+                "accounts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "value"
+            ],
+            "additionalProperties": false
+        }
+    }
+}
